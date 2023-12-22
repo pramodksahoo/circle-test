@@ -11,12 +11,15 @@ jobs:
     executor:
       name: win/default
       size: "medium"
+    environment:
+      SSH_KEY_PATH: C:\Users\circleci\.ssh\id_rsa
 # Add steps to the job
     steps:
       - run:
           name: Store SSH key
           command: echo "$SSH_KEY" > $SSH_KEY_PATH
-      - checkout
+      - checkout:
+          key_path: C:\Users\circleci\.ssh\id_rsa # Specify the SSH key path for checkout
       - run:
           name: Installing g++
           command: 'choco install mingw'
