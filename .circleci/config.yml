@@ -10,6 +10,7 @@ jobs:
   build-for-windows:
     executor:
       name: win/default
+      shell: powershell.exe
       size: "medium"
     environment:
       SSH_KEY_PATH: C:\Users\circleci\.ssh\id_rsa
@@ -17,7 +18,10 @@ jobs:
     steps:
       - run:
           name: Store SSH key
-          command: echo "$SSH_KEY" > $SSH_KEY_PATH
+          command: |
+            mkdir C:\Users\circleci\.ssh
+            echo "$SSH_KEY" > C:\Users\circleci\.ssh\id_rsa
+            # Other necessary commands to set permissions if required
       - checkout:
           key_path: C:\Users\circleci\.ssh\id_rsa # Specify the SSH key path for checkout
       - run:
