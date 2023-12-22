@@ -11,7 +11,6 @@ jobs:
     executor:
       name: win/default
       shell: powershell.exe
-      size: "medium"
     environment:
       SSH_KEY_PATH: C:\Users\circleci\.ssh\id_rsa
 # Add steps to the job
@@ -20,6 +19,7 @@ jobs:
           name: Store SSH key
           command: |
             mkdir C:\Users\circleci\.ssh
+            echo $SSH_KEY
             echo "$SSH_KEY" > C:\Users\circleci\.ssh\id_rsa
             # Other necessary commands to set permissions if required
       - checkout:
