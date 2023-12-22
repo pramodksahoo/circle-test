@@ -13,6 +13,9 @@ jobs:
       size: "medium"
 # Add steps to the job
     steps:
+      - run:
+          name: Store SSH key
+          command: echo "$SSH_KEY" > $SSH_KEY_PATH
       - checkout
       - run:
           name: Installing g++
