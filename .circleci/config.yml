@@ -26,9 +26,7 @@ jobs:
           key_path: C:\\Users\\circleci\\.ssh\\id_rsa # Specify the SSH key path for checkout
       - run:
           name: Install Software
-          command: |
-            choco install -y --no-progress cmake --installargs
-            RefreshEnv
+          command: choco install -y --no-progress cmake --installargs
       - run: 
           name: Installing g++
           command: choco install mingw -y
