@@ -25,14 +25,29 @@ jobs:
       - checkout:
           key_path: C:\\Users\\circleci\\.ssh\\id_rsa # Specify the SSH key path for checkout
       - run:
+          name: Install Software
+          command: |
+            choco install -y --no-progress cmake --installargs
+            RefreshEnv
           name: Installing g++
-          command: 'choco install mingw'
-      - run:
-          name: Compiling Code
-          command: 'g++ -std=c++17 -Wall -Werror -o night src/night.cpp'
-      - run:
-          name: Testing Code
-          command: './night tests/test.night'
+          command: 'choco install mingw -y'
+      - run: 
+          name: Installing vcpkg
+          command: .ci\install-vcpkg.ps1
+      - run: 
+          name: Installing project
+          command: .ci\build-project.ps1
+      - run: 
+          name: Installing project
+          command: .\build\src\show_info\Debug\show_info.exe
+      - run: 
+          name: Installing project
+          command: .\build\src\example\Debug\example.exe
+      - run: 
+          name: Installing project
+          command: Invoke-Expression '& $Env:ProgramFiles\CMake\bin\ctest.exe --output-on-failure --output-junit test-results.xml --test-dir build -C Debug'
+      - store_test_results:
+            path: build\test-results.xml
           
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
