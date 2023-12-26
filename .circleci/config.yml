@@ -9,7 +9,7 @@ orbs:
 jobs:
   build-for-windows:
     executor:
-      name: win/default
+      name: win/server-2022
       shell: powershell.exe
     environment:
       SSH_KEY_PATH: C:\\Users\\circleci\\.ssh\\id_rsa
@@ -26,7 +26,9 @@ jobs:
           key_path: C:\\Users\\circleci\\.ssh\\id_rsa # Specify the SSH key path for checkout
       - run:
           name: Install Software
-          command: choco install -y --no-progress cmake --installargs
+          command: |
+            choco install -y --no-progress cmake --installargs "ADD_CMAKE_TO_PATH=User"
+            RefreshEnv
       - run: 
           name: Installing g++
           command: choco install mingw -y
