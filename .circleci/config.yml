@@ -12,18 +12,18 @@ jobs:
       name: win/default
       shell: powershell.exe
     environment:
-      SSH_KEY_PATH: C:\Users\circleci\.ssh\id_rsa
+      SSH_KEY_PATH: C:\\Users\\circleci\\.ssh\\id_rsa
 # Add steps to the job
     steps:
       - run:
           name: Store SSH key
           command: |
-            mkdir C:\Users\circleci\.ssh
+            mkdir C:\\Users\\circleci\\.ssh
             echo $SSH_KEY
-            echo "$SSH_KEY" > C:\Users\circleci\.ssh\id_rsa
+            echo "$SSH_KEY" > C:\\Users\\circleci\\.ssh\\id_rsa
             # Other necessary commands to set permissions if required
       - checkout:
-          key_path: C:\Users\circleci\.ssh\id_rsa # Specify the SSH key path for checkout
+          key_path: C:\\Users\\circleci\\.ssh\\id_rsa # Specify the SSH key path for checkout
       - run:
           name: Installing g++
           command: 'choco install mingw'
