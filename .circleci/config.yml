@@ -29,8 +29,9 @@ jobs:
           command: |
             choco install -y --no-progress cmake --installargs
             RefreshEnv
+      - run: 
           name: Installing g++
-          command: 'choco install mingw -y'
+          command: choco install mingw -y
       - run: 
           name: Installing vcpkg
           command: .ci\install-vcpkg.ps1
